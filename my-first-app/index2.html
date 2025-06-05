@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Health Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login -->
+    <div class="login-container">
+        <h1 class="title">Health Tracker</h1>
+        <div class="login-box">
+          <div class="user-icon">
+            <img src="https://img.icons8.com/ios/100/user--v1.png" alt="User Icon" />
+          </div>
+          <h2 class="login-text">LOGIN</h2>
+          <form id="loginForm">
+            <div class="input-group">
+              <img src="https://img.icons8.com/ios-glyphs/30/user--v1.png" class="input-icon">
+              <input type="text" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+              <img src="https://img.icons8.com/ios-glyphs/30/lock--v1.png" class="input-icon">
+              <input type="password" placeholder="**********" required>
+            </div>
+            <button type="submit">Login</button>
+            <p class="register-link">Don’t have an account? <a href="#" onclick="showRegister()">Register Now</a></p>
+          </form>
+        </div>
+    </div>
+
+    <!-- Registration Form - OUTSIDE login-container -->
+    <div class="register-container" style="display: none;">
+        <h2>Create Account</h2>
+        <form id="registerForm">
+          <label>Username</label>
+          <input type="text" name="regUsername" required>
+
+          <label>Email</label>
+          <input type="email" name="regEmail" required>
+
+          <label>Password</label>
+          <input type="password" name="regPassword" required>
+
+          <button type="submit">Register</button>
+          <p class="login-link">
+            Already have an account? <a href="#" onclick="showLogin()">Login</a>
+          </p>
+        </form>
+    </div>
+
+    <!-- Personal Info Form - OUTSIDE login-container -->
+    <div class="personal-info-container" style="display: none;">
+        <h2>Personal Information</h2>
+        <form id="personalForm">
+          <label>Name</label>
+          <input type="text" name="name" required>
+
+          <label>Date of Birth</label>
+          <input type="date" name="dob" required>
+
+          <label>Gender</label>
+          <select name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="female">Non-Binary</option>
+            <option value="female">Others</option>
+            <option value="other">Prefer not to say</option>
+          </select>
+
+          <label>Occupation</label>
+          <select name="occupation" required>
+            <option value="">Select Occupation</option>
+            <option value="student">Student</option>
+            <option value="Employed">Employed</option>
+            <option value="Self-employed">Self-employed</option>
+            <option value="Homemaker">Homemaker</option>
+            <option value="Retired">Retired</option>
+            <option value="Salaried">Salaried</option>
+            <option value="Other">Other</option>
+
+
+          </select>
+
+          <label>Type of Work</label>
+          <select name="workType" required>
+            <option value="">Select Type of Work</option> 
+            <option value="Mild">Mild</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Intense">Intense</option>
+          </select>
+
+          <div class="form-actions">
+            <!-- <button type="button" onclick="goBack()">Back</button> -->
+            <!-- <button type="submit" onclick="goToHealthinfo()">Next</button> -->
+            <button type="submit">Next</button>
+        </div>
+        </form>
+    </div>
+
+    <!-- Health Details Form -->
+    <div class="health-info-container" style="display: none;">
+        <h2>Anthropometric & Lifestyle Information</h2>
+        <form id="healthForm">
+            <!-- Anthropometric Measurements -->
+            <h3>Anthropometric Measurements</h3>
+            <label>Height(cm)</label>
+            <input type="number" name="height" placeholder="Height (cm)" required/>
+
+
+            <label>Weight(kg)</label>
+            <input type="number" name="weight(kg)" placeholder="Weight (kg)" required />
+            <p style="font-size: 12px;">Note:We will calculate your BMI or growth percentiles based on this information.</p>
+
+            <!-- Lifestyle -->
+            <h3>Life Style</h3>
+            <label>Weekday Bedtime</label>
+            <input type="time" name="bedtime" required />
+
+            <label>Weekday Wake-up Time</label>
+            <input type="time" name="wakeTime" required/>
+
+            <label>Nap Duration (hours)</label>
+            <input type="number" name="napDuration" step="1" required />
+
+            <label>Sleep Quality</label>
+            <select name="sleepQuality" required>
+            <option value="">Select</option>
+            <option value="poor">Poor</option>
+            <option value="average">Average</option>
+            <option value="good">Good</option>
+            </select>
+
+            <!-- Screen Time -->
+            <h4>Screen Time (hours per day)</h4>
+            <label>Mobile</label>
+            <input type="number" name="mobileTime" required/>
+            <select name="mobilePurpose"required>
+            <option value="">Purpose</option>
+            <option value="work">Work</option>
+            <option value="leisure">Leisure</option>
+            <option value="education">Education</option>
+            <option value="others">others</option>
+
+            </select>
+
+            <label>TV</label>
+            <input type="number" name="tvTime" required/>
+            <select name="tvPurpose" required>
+            <option value="" disabled selected>Purpose</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="news">News</option>
+            <option value="education">Education</option>
+            <option value="others">others</option>
+
+            </select>
+
+            <label>Laptop</label>
+            <input type="number" name="laptopTime" required />
+            <select name="laptopPurpose"required>
+            <option value="">Purpose</option>
+            <option value="work">Work</option>
+            <option value="gaming">Gaming</option>
+            <option value="education">Education</option>
+            <option value="others">others</option>
+
+            </select>
+
+            <!-- Physical Activity -->
+            <h3>Physical Activity</h3>
+            <label>Do you exercise?</label>
+            <input type="radio" name="exercise" required value="yes" onclick="toggleActivityInputs(true)" class="input"> Yes  <br>
+            <input type="radio" name="exercise" required  value="no" onclick="toggleActivityInputs(false)" class="input"> No 
+            
+            <div id="activityInputs" style="display: none;">
+                <label>Moderate Activity on Weekdays (hours/day)</label>
+                <input type="number" name="modWeekdays" step="1" />
+                <label>Vigorous Activity on Weekdays (hours/day)</label>
+                <input type="number" name="vigWeekdays" step="1"  />
+                <label>Moderate Activity on Weekends (hours/day)</label>
+                <input type="number" name="modWeekends" step="1"  />
+                <label>Vigorous Activity on Weekends (hours/day)</label>
+                <input type="number" name="vigWeekends" step="1"  />
+            </div>
+
+            <!-- Diet -->
+            <h3>Diet</h3>
+            <label>Total meals per day</label>
+            <input type="number" name="mealsPerDay" required/>
+            <label>Missed meals per week</label>
+            <input type="radio" name="missed meals" required value="yes" onclick="toggleActivitymissedmeals(true)" class="input"> Yes <br>
+            <input type="radio" name="missed meals"required value="no" onclick="toggleActivitymissedmeals(false)" class="input"> No
+
+            <div id="activitymissedmeals" style="display: none;">
+
+                <select name="MisseddietPref" required>
+                <option value="Morning">Morning</option>
+                <option value="After-noon">After-noon</option>
+                <option value="Night">Night</option>
+                </select>
+            </div>
+
+            <label>Meals eaten outside on weekdays</label>
+            <input type="number" name="outWeekdays" required />
+            <label>Meals eaten outside on weekends</label>
+            <input type="number" name="outWeekends" required />
+            <label>Daily fruit intake(servings/day)</label>
+            <input type="number" name="fruitIntake" placeholder="(100gm)" required />
+            <label>Daily vegetable intake(servings/day)</label>
+            <input type="number" name="vegIntake" placeholder="(100gm)" required />
+            <label>Daily water intake</label>
+            <input type="number" name="waterIntake" placeholder="(liters/day)" required/>
+            <label>Diet preferences</label>
+            <select name="dietPref" required>
+            <option value="">Select</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="nonvegetarian">Non-Vegetarian</option>
+            <option value="vegan">Vegan</option>
+            <option value="Eggetarian">Eggetarian</option>
+            <option value="Pescatarian">Pescatarian</option>
+            <option value="Gluten-free">Gluten-free</option>
+            <option value="others">others</option>
+            </select>
+
+            <div class="form-actions">
+                <button type="button" onclick="goToPersonalInfo()">Back</button>
+                <button type="button" id="healthformnextbutton">Next</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="habits" style="display: none;">
+        <h2>Habits</h2>
+
+        <!-- Smoking -->
+        <div class="habit-group">
+            <label>Smoking:</label>
+            <input type="radio" name="smoking" value="yes" onclick="handleHabitChange('smoking', 'yes')" class="input"> Yes <br>
+            <input type="radio" name="smoking" value="no" onclick="handleHabitChange('smoking', 'no')" class="input"> No <br>
+            <input type="radio" name="smoking" value="past" onclick="handleHabitChange('smoking', 'past')" class="input"> Past History
+            <div class="smoking-current hidden">
+              <label>Current Frequency:</label>
+              <select name="smokingCurrent">
+                <option value="">Select Frequency</option>
+                <option>1x/week</option>
+                <option>2x/week</option>
+                <option>3x/week</option>
+                <option>4x/week</option>
+                <option>Daily</option>
+                <option>Multiple times/day</option>
+              </select>
+            </div>
+            <div class="smoking-past hidden">
+              <label>Past Frequency:</label>
+              <input type="text" name="smokingPast" placeholder="e.g. 2x/week, stopped in 2020" />
+            </div>
+        </div>
+
+        <!-- Alcohol -->
+        <div class="habit-group">
+            <label>Alcohol:</label>
+            <input type="radio" name="alcohol" value="yes" onclick="handleHabitChange('alcohol', 'yes')" class="input"> Yes <br>
+            <input type="radio" name="alcohol" value="no" onclick="handleHabitChange('alcohol', 'no')" class="input"> No <br>
+            <input type="radio" name="alcohol" value="past" onclick="handleHabitChange('alcohol', 'past')" class="input"> Past History            
+            <div class="alcohol-current hidden">
+              <label>Current Frequency:</label>
+              <select name="alcoholCurrent">
+                <option value="">Select Frequency</option>
+                <option>1x/week</option>
+                <option>2x/week</option>
+                <option>3x/week</option>
+                <option>4x/week</option>
+                <option>Daily</option>
+                <option>Multiple times/day</option>
+              </select>
+            </div>
+            <div class="alcohol-past hidden">
+              <label>Past Frequency:</label>
+              <input type="text" name="alcoholPast" placeholder="e.g. occasional, stopped in 2019" />
+            </div>
+        </div>
+
+        <!-- Smokeless Tobacco -->
+        <div class="habit-group">
+            <label>Smokeless Tobacco:</label>
+            <input type="radio" name="smokeless" value="yes" onclick="handleHabitChange('smokeless', 'yes')" class="input"> Yes <br>
+            <input type="radio" name="smokeless" value="no" onclick="handleHabitChange('smokeless', 'no')" class="input"> No <br>
+            <input type="radio" name="smokeless" value="past" onclick="handleHabitChange('smokeless', 'past')" class="input"> Past History
+            <div class="smokeless-current hidden">
+              <label>Current Frequency:</label>
+              <select name="smokelessCurrent">
+                <option value="">Select Frequency</option>
+                <option>1x/week</option>
+                <option>2x/week</option>
+                <option>3x/week</option>
+                <option>4x/week</option>
+                <option>Daily</option>
+                <option>Multiple times/day</option>
+              </select>
+            </div>
+            <div class="smokeless-past hidden">
+              <label>Past Frequency:</label>
+              <input type="text" name="smokelessPast" placeholder="e.g. frequent, stopped in 2018" />
+            </div>
+            <div class="form-actions">
+                <button type="button" onclick="goBackToHealthinfo()">Back</button>
+                <button type="button" onclick="goToMedicalHistory()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medical History & Fitness Goals -->
+<div id="medical-history" style="display: none;">
+  <h2>Medical History</h2>
+  <form id="medicalForm">
+    <!-- Personal Diagnosed Conditions -->
+    <h3>Diagnosed Conditions</h3>
+  <input type="radio" name="diagnosedCondition" value="None" class="input" onclick="toggleothersInput(false)"> None <br>
+  <input type="radio" name="diagnosedCondition" value="Hypertension" class="input" onclick="toggleothersInput(false)"> Hypertension <br>
+  <input type="radio" name="diagnosedCondition" value="Diabetes"  class="input" onclick="toggleothersInput(false)"> Diabetes <br>
+  <input type="radio" name="diagnosedCondition" value="Heart disease"  class="input" onclick="toggleothersInput(false)"> Heart disease <br>
+  <input type="radio" name="diagnosedCondition" value="Stroke"  class="input" onclick="toggleothersInput(false)"> Stroke <br>
+  <input type="radio" name="diagnosedCondition" value="Cancer"  class="input" onclick="toggleothersInput(false)"> Cancer <br>
+  <input type="radio" name="diagnosedCondition" value="Asthma"  class="input" onclick="toggleothersInput(false)"> Asthma <br>
+  <input type="radio" name="diagnosedCondition" value="Anxiety"  class="input" onclick="toggleothersInput(false)"> Anxiety <br>
+  <input type="radio" name="diagnosedCondition" value="Depression"  class="input" onclick="toggleothersInput(false)"> Depression <br>
+  <input type="radio" name="diagnosedCondition" value="Other "  class="input" onclick="toggleothersInput(true)"> Others <br>
+
+    <div id="othersBox" style="display: none;">
+        <input type="text" name="otherCondition" placeholder="Specify other condition">
+    </div>
+<div id="otherConditionBox" class="hidden">
+  <input type="text" name="otherCondition" placeholder="Specify other condition">
+</div>
+
+    
+
+    <!-- Year of Diagnosis -->
+    <label>Year of Diagnosis: <input type="text" name="diagnosisYear" placeholder="E.g., 2018"></label>
+
+    <!-- Medications -->
+    <h3>Medications</h3>
+    <input type="radio" name="medications" value="Yes" class="input" onclick="toggleMedical('medicalAllergyBox', true)"> Yes <br>
+    <input type="radio" name="medications" value="No" class="input" onclick="toggleMedical('medicalAllergyBox', false)"> No <br>
+    <input type="radio" name="medications" value="Suggested but not taking" class="input" onclick="toggleMedical('medicalAllergyBox', false)"> Suggested but not taking <br>
+
+    <div id="medicalAllergyBox" class="hidden">
+        <input type="text" name="medicationDetails" placeholder="Enter medication name">
+    </div>
+
+
+
+    <!-- Family History -->
+    <h3>Family History</h3>
+    <input type="radio" name="familyHistory" value="None" class="input"> None <br>
+    <input type="radio" name="familyHistory" value="Hypertension" class="input"> Hypertension <br>
+    <input type="radio" name="familyHistory" value="Diabetes" class="input"> Diabetes <br>
+    <input type="radio" name="familyHistory" value="Heart disease" class="input"> Heart disease <br>
+    <input type="radio" name="familyHistory" value="Stroke" class="input"> Stroke <br>
+    <input type="radio" name="familyHistory" value="Cancer" class="input"> Cancer <br>
+    <input type="radio" name="familyHistory" value="Asthma"class="input"> Asthma <br>
+    <input type="radio" name="familyHistory" value="Other" class="input" onclick="toggleOtherField(this, 'otherFamilyBox')"> Other <br>
+
+<div id="otherFamilyBox" class="hidden">
+       <input type="text" name="otherFamilyHistory" placeholder="Specify family condition">
+</div>
+    
+
+    <!-- Allergies -->
+    <h3>Allergies</h3>
+    <label>Food Allergies:</label>
+    <input type="radio" name="foodAllergy" value="Yes" class="input" onclick="toggleAllergy('food', true)"> Yes <br>
+    <input type="radio" name="foodAllergy" value="No" class="input" onclick="toggleAllergy('food', false)"> No <br>
+    <div id="foodAllergyBox" class="hidden">
+           <input type="text" name="foodAllergyDetails" placeholder="Specify if yes">
+    </div>
+
+    <label>Drug Allergies:</label>
+    <input type="radio" name="drugAllergy" value="Yes" class="input" onclick="toggleAllergy('drug', true)"> Yes <br>
+    <input type="radio" name="drugAllergy" value="No" class="input" onclick="toggleAllergy('drug', false)"> No <br>
+    <div id="drugAllergyBox" class="hidden">
+            <input type="text" name="drugAllergyDetails" placeholder="Specify if yes">
+    </div>
+
+    <!-- Fitness Goals -->
+    <h3>Fitness Goals</h3>
+    <input type="radio" name="fitnessGoal" value="Weight Loss" class="input"> Weight Loss <br>
+    <input type="radio" name="fitnessGoal" value="Muscle Gain" class="input"> Muscle Gain <br>
+    <input type="radio" name="fitnessGoal" value="Maintain Health" class="input"> Maintain Health <br>
+    <input type="radio" name="fitnessGoal" value="Other" class="input" onclick="toggleFitnessField(this, 'otherFitnessBox')"> Other
+    <div id="otherFitnessBox" class="hidden">
+        <input type="text" name="otherGoal" placeholder="Specify fitness goal">
+    </div>
+
+    <div class="form-actions">
+      <button type="button" onclick="goBackToHabits()">Back</button>
+      <button type="submit">Save</button>
+    </div>
+  </form>
+</div>
+
+    <script src="script.js"></script>
+</body>
