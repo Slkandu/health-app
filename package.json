@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "expo": "^53.0.10",
+    "expo-image": "~2.2.0"
+  }
+}
